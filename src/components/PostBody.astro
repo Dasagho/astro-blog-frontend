@@ -10,7 +10,7 @@ const { html } = Astro.props;
 const { url } = await getSettings();
 ---
 
-<div class="gh-content" set:html={localizeHtml(html, url)} />
+<div class="post-body" set:html={localizeHtml(html, url)} />
 
 <script>
   // Interactividad mínima de las tarjetas de Ghost. Se re-ejecuta tras cada

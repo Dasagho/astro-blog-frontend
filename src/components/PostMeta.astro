@@ -6,19 +6,19 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const tag = publicTags(post)[0];
+const tags = publicTags(post);
 ---
 
 <p class="meta" transition:name={`post-meta-${post.slug}`}>
   <time datetime={post.published_at}>{formatDate(post.published_at)}</time>
   <span aria-hidden="true">·</span>
   <span>{post.reading_time} min</span>
-  {tag && (
+  {tags.map((tag) => (
     <>
       <span aria-hidden="true">·</span>
       <a class="tag" href={`/tag/${tag.slug}/`}>{tag.name}</a>
     </>
-  )}
+  ))}
 </p>
 
 <style>

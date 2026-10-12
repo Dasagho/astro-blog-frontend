@@ -23,7 +23,7 @@ const href = `/${post.slug}/`;
     </a>
   )}
   <h2 class="title">
-    <a href={href} transition:name={`post-title-${post.slug}`}>{post.title}</a>
+    <a href={href} transition:name={`title-${post.slug}`}>{post.title}</a>
   </h2>
   <PostMeta post={post} />
   {excerptOf(post) && <p class="excerpt">{excerptOf(post)}</p>}

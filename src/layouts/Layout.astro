@@ -3,9 +3,7 @@ import { ClientRouter, fade } from 'astro:transitions';
 import { getSettings } from '../lib/ghost';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import '../styles/tokens.css';
-import '../styles/base.css';
-import '../styles/transitions.css';
+import '../styles/global.css';
 
 interface Props {
   title?: string;
@@ -19,7 +17,7 @@ const accent = settings.accent_color ? `--accent: ${settings.accent_color}` : un
 ---
 
 <!doctype html>
-<html lang={settings.lang || 'es'} style={accent}>
+<html lang="es" style={accent}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

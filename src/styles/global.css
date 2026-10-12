@@ -1,0 +1,9 @@
+/*
+ * Punto de entrada de los estilos globales.
+ * Variables (colores, tipografía, espaciados): tokens.css
+ * Reset y elementos base: base.css · Transiciones: transitions.css
+ * Contenido de Ghost (.post-body): content.css, cargado por PostBody.astro
+ */
+@import './tokens.css';
+@import './base.css';
+@import './transitions.css';
