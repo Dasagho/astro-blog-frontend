@@ -1,0 +1,45 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPosts, getTags, type Post, type Tag } from '../../lib/ghost';
+
+export const getStaticPaths = (async () => {
+  const [tags, posts] = await Promise.all([getTags(), getPosts()]);
+  return tags.map((tag) => ({
+    params: { slug: tag.slug },
+    props: { tag, posts: posts.filter((p) => p.tags?.some((t) => t.slug === tag.slug)) },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  tag: Tag;
+  posts: Post[];
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout title={tag.name} description={tag.description ?? undefined}>
+  <div class="container">
+    <header class="intro">
+      <h1>{tag.name}</h1>
+      {tag.description && <p>{tag.description}</p>}
+    </header>
+    {posts.length === 0 ? (
+      <p class="empty">Todavía no hay posts con esta etiqueta.</p>
+    ) : (
+      <ol class="posts" role="list">
+        {posts.map((post) => <li><PostCard post={post} /></li>)}
+      </ol>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .intro { margin-bottom: var(--space-xl); }
+  .intro h1 { font-size: var(--step-3); }
+  .intro p { margin: var(--space-xs) 0 0; color: var(--muted); font-size: var(--step-1); }
+  .posts { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-xl); }
+  .empty { color: var(--muted); }
+</style>

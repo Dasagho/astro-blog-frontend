@@ -1,16 +1,33 @@
 ---
+import { localPath, type NavItem } from '../lib/ghost';
+
 interface Props {
   title: string;
+  siteUrl: string;
+  navigation: NavItem[];
 }
 
-const { title } = Astro.props;
+const { title, siteUrl, navigation } = Astro.props;
 ---
 
 <footer class="site-footer">
-  <div class="container">© {new Date().getFullYear()} {title}</div>
+  <div class="container inner">
+    <span>© {new Date().getFullYear()} {title}</span>
+    <nav aria-label="Secundaria">
+      <ul role="list">
+        {navigation.map((item) => (
+          <li><a href={localPath(item.url, siteUrl)}>{item.label}</a></li>
+        ))}
+        <li><a href="/rss.xml" data-astro-reload>RSS</a></li>
+      </ul>
+    </nav>
+  </div>
 </footer>
 
 <style>
+  .inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-xs); }
+  ul { display: flex; flex-wrap: wrap; gap: var(--space-s); list-style: none; margin: 0; padding: 0; }
+  a { text-decoration: none; }
   .site-footer {
     padding-block: var(--space-m);
     border-top: 1px solid var(--border);

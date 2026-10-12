@@ -3,25 +3,40 @@ import type { GetStaticPaths } from 'astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostMeta from '../components/PostMeta.astro';
 import PostBody from '../components/PostBody.astro';
-import { excerptOf, getPosts, type Post } from '../lib/ghost';
+import { excerptOf, getPages, getPosts, type Post } from '../lib/ghost';
 
 export const getStaticPaths = (async () => {
-  const posts = await getPosts();
-  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+  const [posts, pages] = await Promise.all([getPosts(), getPages()]);
+  // Slugs que chocan con rutas propias del frontend (/tag/, /author/, /rss.xml...)
+  const reserved = new Set(['tag', 'author', 'rss', '404']);
+  const seen = new Set<string>();
+  const entries = [
+    ...posts.map((post) => ({ post, isPage: false })),
+    ...pages.map((post) => ({ post, isPage: true })),
+  ].filter(({ post }) => {
+    if (reserved.has(post.slug) || seen.has(post.slug)) {
+      console.warn(`[ghost] slug "${post.slug}" duplicado o reservado: se omite.`);
+      return false;
+    }
+    seen.add(post.slug);
+    return true;
+  });
+  return entries.map(({ post, isPage }) => ({ params: { slug: post.slug }, props: { post, isPage } }));
 }) satisfies GetStaticPaths;
 
 interface Props {
   post: Post;
+  isPage: boolean;
 }
 
-const { post } = Astro.props;
+const { post, isPage } = Astro.props;
 ---
 
 <BaseLayout title={post.title} description={excerptOf(post)}>
   <article>
     <header class="container post-header">
       <h1 transition:name={`post-title-${post.slug}`}>{post.title}</h1>
-      <PostMeta post={post} />
+      {!isPage && <PostMeta post={post} />}
     </header>
 
     {post.feature_image && (
@@ -37,9 +52,17 @@ const { post } = Astro.props;
 
     {post.html && <PostBody html={post.html} />}
 
-    <nav class="container back">
-      <a href="/">← Todos los posts</a>
-    </nav>
+    {!post.access && (
+      <p class="container locked">
+        Este contenido es solo para miembros y no está disponible en este sitio.
+      </p>
+    )}
+
+    {!isPage && (
+      <nav class="container back">
+        <a href="/">← Todos los posts</a>
+      </nav>
+    )}
   </article>
 </BaseLayout>
 
@@ -65,6 +88,15 @@ const { post } = Astro.props;
     font-size: var(--step--1);
     color: var(--muted);
     text-align: center;
+  }
+
+  .locked {
+    margin-top: var(--space-m);
+    padding: var(--space-s) var(--space-m);
+    border-radius: var(--radius);
+    background: var(--surface);
+    font-family: var(--font-ui);
+    color: var(--muted);
   }
 
   .back {

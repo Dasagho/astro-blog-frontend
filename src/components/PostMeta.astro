@@ -16,7 +16,7 @@ const tag = publicTags(post)[0];
   {tag && (
     <>
       <span aria-hidden="true">·</span>
-      <span class="tag">{tag.name}</span>
+      <a class="tag" href={`/tag/${tag.slug}/`}>{tag.name}</a>
     </>
   )}
 </p>
@@ -31,5 +31,6 @@ const tag = publicTags(post)[0];
     font-size: var(--step--1);
     color: var(--muted);
   }
-  .tag { color: var(--accent); }
+  .tag { color: var(--accent); text-decoration: none; }
+  .tag:hover { text-decoration: underline; }
 </style>

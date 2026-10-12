@@ -167,3 +167,86 @@
 }
 .kg-btn-accent { background: var(--accent); color: var(--on-accent); }
 .kg-btn-accent:hover { color: var(--on-accent); filter: brightness(1.1); }
+
+/* Vídeo y audio: se usan los controles nativos (ver PostBody.astro) */
+.kg-video-card video { width: 100%; height: auto; border-radius: var(--radius); background: var(--surface); }
+.kg-video-card :is(.kg-video-overlay, .kg-video-player-container, .kg-video-large-play-icon),
+.kg-audio-card .kg-audio-player-container,
+.kg-audio-card .kg-audio-hide { display: none; }
+.kg-audio-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  align-items: center;
+  padding: var(--space-s);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+}
+.kg-audio-thumbnail { width: 4rem; height: 4rem; object-fit: cover; border-radius: var(--radius); }
+.kg-audio-thumbnail.placeholder { display: none; }
+.kg-audio-title { font-weight: 500; }
+.kg-audio-card audio { flex: 1 1 100%; width: 100%; }
+
+/* Archivo */
+.kg-file-card a.kg-file-card-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-s);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-family: var(--font-ui);
+}
+.kg-file-card-title { font-weight: 500; }
+.kg-file-card-caption,
+.kg-file-card-metadata { font-size: var(--step--1); color: var(--muted); }
+.kg-file-card-icon { width: 1.6rem; flex: none; }
+.kg-file-card-icon svg { width: 100%; height: auto; fill: currentColor; }
+
+/* Producto */
+.kg-product-card-container {
+  display: grid;
+  gap: var(--space-xs);
+  padding: var(--space-s);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+}
+.kg-product-card-image { border-radius: var(--radius); }
+.kg-product-card-title { font-size: var(--step-1); font-weight: 500; margin: 0; }
+.kg-product-card-description { color: var(--muted); }
+.kg-product-card-rating-star svg { width: 1em; fill: var(--border); }
+.kg-product-card-rating-active svg { fill: var(--accent); }
+.kg-product-card-rating { display: flex; }
+
+/* Cabecera (header card) */
+.kg-header-card {
+  display: grid;
+  gap: var(--space-s);
+  justify-items: center;
+  padding: var(--space-l) var(--space-m);
+  text-align: center;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.kg-header-card-header { font-size: var(--step-3); }
+.kg-header-card-subheader { margin: 0; color: var(--muted); }
+.kg-header-card-button {
+  padding: 0.6em 1.3em;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--on-accent);
+  text-decoration: none;
+  font-family: var(--font-ui);
+}
+
+/* Tarjetas de HTML/Markdown y bloques sin estilo propio */
+.kg-html-card, .kg-markdown-card { overflow-x: auto; }
+.gh-content table { width: 100%; border-collapse: collapse; font-size: var(--step--1); }
+.gh-content :is(th, td) { padding: 0.5em 0.75em; border-bottom: 1px solid var(--border); text-align: left; }
+
+/* Tarjetas que necesitan membresía/JS de Ghost: no aplican en un sitio estático */
+.kg-signup-card, .kg-cta-card, .kg-donation-card { display: none; }

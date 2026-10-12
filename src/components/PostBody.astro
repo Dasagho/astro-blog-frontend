@@ -1,14 +1,16 @@
 ---
 import '../styles/content.css';
+import { getSettings, localizeHtml } from '../lib/ghost';
 
 interface Props {
   html: string;
 }
 
 const { html } = Astro.props;
+const { url } = await getSettings();
 ---
 
-<div class="gh-content" set:html={html} />
+<div class="gh-content" set:html={localizeHtml(html, url)} />
 
 <script>
   // Interactividad mínima de las tarjetas de Ghost. Se re-ejecuta tras cada
@@ -30,8 +32,17 @@ const { html } = Astro.props;
     });
   }
 
+  // Vídeo y audio: Ghost emite un reproductor propio que depende de su JS de
+  // tema; se sustituye por los controles nativos del navegador.
+  function initMedia() {
+    document.querySelectorAll<HTMLMediaElement>('.kg-video-card video, .kg-audio-card audio').forEach((el) => {
+      el.controls = true;
+    });
+  }
+
   document.addEventListener('astro:page-load', () => {
     initGalleries();
+    initMedia();
     initToggles();
   });
 </script>

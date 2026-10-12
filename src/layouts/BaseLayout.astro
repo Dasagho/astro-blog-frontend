@@ -32,14 +32,26 @@ const accent = settings.accent_color ? `--accent: ${settings.accent_color}` : un
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap"
     />
+    <link rel="alternate" type="application/rss+xml" title={settings.title} href="/rss.xml" />
     <ClientRouter />
+    {settings.codeinjection_head && <Fragment set:html={settings.codeinjection_head} />}
   </head>
   <body>
-    <SiteHeader title={settings.title} logo={settings.logo} />
+    <SiteHeader
+      title={settings.title}
+      logo={settings.logo}
+      siteUrl={settings.url}
+      navigation={settings.navigation}
+    />
     <main transition:animate={fade({ duration: '0.2s' })}>
       <slot />
     </main>
-    <SiteFooter title={settings.title} />
+    <SiteFooter
+      title={settings.title}
+      siteUrl={settings.url}
+      navigation={settings.secondary_navigation}
+    />
+    {settings.codeinjection_foot && <Fragment set:html={settings.codeinjection_foot} />}
   </body>
 </html>
 
