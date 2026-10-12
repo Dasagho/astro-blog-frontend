@@ -1,7 +1,10 @@
 // @ts-check
+/* global process */
 import { defineConfig, envField } from 'astro/config';
 
+// SITE_URL (opcional): dominio público del frontend, usado en el RSS.
 export default defineConfig({
+  site: process.env.SITE_URL || undefined,
   output: 'static',
   trailingSlash: 'always',
   build: { format: 'directory' },

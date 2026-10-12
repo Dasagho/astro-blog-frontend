@@ -1,11 +1,16 @@
 ---
+import { localPath, type NavItem } from '../lib/ghost';
+
 interface Props {
   title: string;
   logo: string | null;
+  siteUrl: string;
+  navigation: NavItem[];
 }
 
-const { title, logo } = Astro.props;
+const { title, logo, siteUrl, navigation } = Astro.props;
 const isHome = Astro.url.pathname === '/';
+const current = (href: string) => (Astro.url.pathname === href ? 'page' : undefined);
 ---
 
 <header class="site-header" transition:persist="site-header">
@@ -13,6 +18,20 @@ const isHome = Astro.url.pathname === '/';
     <a class="brand" href="/" aria-current={isHome ? 'page' : undefined}>
       {logo ? <img src={logo} alt={title} /> : title}
     </a>
+    {navigation.length > 0 && (
+      <nav aria-label="Principal">
+        <ul role="list">
+          {navigation.map((item) => {
+            const href = localPath(item.url, siteUrl);
+            return (
+              <li>
+                <a href={href} aria-current={current(href)}>{item.label}</a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    )}
   </div>
 </header>
 
@@ -33,5 +52,16 @@ const isHome = Astro.url.pathname === '/';
     letter-spacing: -0.01em;
     text-decoration: none;
   }
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--step--1);
+  }
+  nav a { text-decoration: none; }
+  nav a[aria-current='page'] { color: var(--accent); }
   .brand img { max-height: 2rem; width: auto; }
 </style>

@@ -1,0 +1,47 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getAuthors, getPosts, type Author, type Post } from '../../lib/ghost';
+
+export const getStaticPaths = (async () => {
+  const [authors, posts] = await Promise.all([getAuthors(), getPosts()]);
+  return authors.map((author) => ({
+    params: { slug: author.slug },
+    props: { author, posts: posts.filter((p) => p.authors?.some((a) => a.slug === author.slug)) },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  author: Author;
+  posts: Post[];
+}
+
+const { author, posts } = Astro.props;
+---
+
+<BaseLayout title={author.name} description={author.bio ?? undefined}>
+  <div class="container">
+    <header class="intro">
+      {author.profile_image && <img class="avatar" src={author.profile_image} alt="" />}
+      <h1>{author.name}</h1>
+      {author.bio && <p>{author.bio}</p>}
+    </header>
+    {posts.length === 0 ? (
+      <p class="empty">Todavía no hay posts de este autor.</p>
+    ) : (
+      <ol class="posts" role="list">
+        {posts.map((post) => <li><PostCard post={post} /></li>)}
+      </ol>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .intro { margin-bottom: var(--space-xl); }
+  .intro h1 { font-size: var(--step-3); }
+  .intro p { margin: var(--space-xs) 0 0; color: var(--muted); font-size: var(--step-1); }
+  .avatar { width: 4rem; height: 4rem; border-radius: 50%; object-fit: cover; margin-bottom: var(--space-s); }
+  .posts { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-xl); }
+  .empty { color: var(--muted); }
+</style>
