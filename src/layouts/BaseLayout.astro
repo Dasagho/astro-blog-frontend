@@ -1,0 +1,45 @@
+---
+import { ClientRouter, fade } from 'astro:transitions';
+import { getSettings } from '../lib/ghost';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/transitions.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const settings = await getSettings();
+const { title, description = settings.description } = Astro.props;
+const pageTitle = title ? `${title} · ${settings.title}` : settings.title;
+const accent = settings.accent_color ? `--accent: ${settings.accent_color}` : undefined;
+---
+
+<!doctype html>
+<html lang={settings.lang || 'es'} style={accent}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    {description && <meta name="description" content={description} />}
+    {settings.icon && <link rel="icon" href={settings.icon} />}
+    <ClientRouter />
+  </head>
+  <body>
+    <SiteHeader title={settings.title} logo={settings.logo} />
+    <main transition:animate={fade({ duration: '0.2s' })}>
+      <slot />
+    </main>
+    <SiteFooter title={settings.title} />
+  </body>
+</html>
+
+<style>
+  main {
+    flex: 1;
+    padding-block: var(--space-l) var(--space-xl);
+  }
+</style>

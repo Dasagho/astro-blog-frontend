@@ -1,0 +1,35 @@
+---
+import { formatDate, publicTags, type Post } from '../lib/ghost';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const tag = publicTags(post)[0];
+---
+
+<p class="meta" transition:name={`post-meta-${post.slug}`}>
+  <time datetime={post.published_at}>{formatDate(post.published_at)}</time>
+  <span aria-hidden="true">·</span>
+  <span>{post.reading_time} min</span>
+  {tag && (
+    <>
+      <span aria-hidden="true">·</span>
+      <span class="tag">{tag.name}</span>
+    </>
+  )}
+</p>
+
+<style>
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin: 0;
+    font-family: var(--font-ui);
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .tag { color: var(--accent); }
+</style>

@@ -1,0 +1,13 @@
+/* Ajustes globales de las view transitions (ClientRouter). */
+::view-transition-group(*) {
+  animation-duration: var(--duration);
+  animation-timing-function: var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,37 @@
+---
+import '../styles/content.css';
+
+interface Props {
+  html: string;
+}
+
+const { html } = Astro.props;
+---
+
+<div class="gh-content" set:html={html} />
+
+<script>
+  // Interactividad mínima de las tarjetas de Ghost. Se re-ejecuta tras cada
+  // navegación del ClientRouter (astro:page-load), no solo en la carga inicial.
+  function initGalleries() {
+    document.querySelectorAll<HTMLImageElement>('.kg-gallery-image img').forEach((img) => {
+      const w = Number(img.getAttribute('width'));
+      const h = Number(img.getAttribute('height'));
+      if (w && h) img.closest<HTMLElement>('.kg-gallery-image')!.style.flex = `${w / h} 1 0`;
+    });
+  }
+
+  function initToggles() {
+    document.querySelectorAll<HTMLElement>('.kg-toggle-card').forEach((card) => {
+      card.querySelector('.kg-toggle-heading')?.addEventListener('click', () => {
+        const open = card.dataset.kgToggleState === 'open';
+        card.dataset.kgToggleState = open ? 'close' : 'open';
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initGalleries();
+    initToggles();
+  });
+</script>

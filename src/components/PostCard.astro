@@ -1,0 +1,54 @@
+---
+import { excerptOf, type Post } from '../lib/ghost';
+import PostMeta from './PostMeta.astro';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const href = `/${post.slug}/`;
+---
+
+<article class="card">
+  {post.feature_image && (
+    <a class="image" href={href} tabindex="-1" aria-hidden="true">
+      <img
+        src={post.feature_image}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        transition:name={`post-image-${post.slug}`}
+      />
+    </a>
+  )}
+  <h2 class="title">
+    <a href={href} transition:name={`post-title-${post.slug}`}>{post.title}</a>
+  </h2>
+  <PostMeta post={post} />
+  {excerptOf(post) && <p class="excerpt">{excerptOf(post)}</p>}
+</article>
+
+<style>
+  .card {
+    display: grid;
+    gap: var(--space-xs);
+  }
+  .image img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-bottom: var(--space-xs);
+  }
+  .title { font-size: var(--step-1); }
+  .title a { text-decoration: none; display: inline-block; }
+  .excerpt {
+    margin: 0;
+    color: var(--muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

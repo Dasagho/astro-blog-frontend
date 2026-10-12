@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="container">© {new Date().getFullYear()} {title}</div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: var(--space-m);
+    border-top: 1px solid var(--border);
+    font-family: var(--font-ui);
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+</style>

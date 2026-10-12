@@ -1,0 +1,75 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostMeta from '../components/PostMeta.astro';
+import PostBody from '../components/PostBody.astro';
+import { excerptOf, getPosts, type Post } from '../lib/ghost';
+
+export const getStaticPaths = (async () => {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+---
+
+<BaseLayout title={post.title} description={excerptOf(post)}>
+  <article>
+    <header class="container post-header">
+      <h1 transition:name={`post-title-${post.slug}`}>{post.title}</h1>
+      <PostMeta post={post} />
+    </header>
+
+    {post.feature_image && (
+      <figure class="feature">
+        <img
+          src={post.feature_image}
+          alt={post.feature_image_alt ?? ''}
+          transition:name={`post-image-${post.slug}`}
+        />
+        {post.feature_image_caption && <figcaption set:html={post.feature_image_caption} />}
+      </figure>
+    )}
+
+    {post.html && <PostBody html={post.html} />}
+
+    <nav class="container back">
+      <a href="/">← Todos los posts</a>
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-header {
+    display: grid;
+    gap: var(--space-s);
+    margin-bottom: var(--space-l);
+  }
+  h1 { font-size: var(--step-3); }
+
+  .feature {
+    width: min(var(--wide), 100% - 2 * var(--gutter));
+    margin: 0 auto var(--space-l);
+  }
+  .feature img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .feature figcaption {
+    margin-top: 0.6em;
+    font-family: var(--font-ui);
+    font-size: var(--step--1);
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .back {
+    margin-top: var(--space-xl);
+    font-family: var(--font-ui);
+    font-size: var(--step--1);
+  }
+</style>

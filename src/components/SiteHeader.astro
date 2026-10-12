@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  logo: string | null;
+}
+
+const { title, logo } = Astro.props;
+const isHome = Astro.url.pathname === '/';
+---
+
+<header class="site-header" transition:persist="site-header">
+  <div class="container inner">
+    <a class="brand" href="/" aria-current={isHome ? 'page' : undefined}>
+      {logo ? <img src={logo} alt={title} /> : title}
+    </a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-ui);
+  }
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 4rem;
+  }
+  .brand {
+    font-weight: 700;
+    font-size: var(--step-0);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+  .brand img { max-height: 2rem; width: auto; }
+</style>

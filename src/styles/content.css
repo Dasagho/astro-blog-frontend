@@ -1,0 +1,169 @@
+/*
+ * Contenido HTML generado por el editor de Ghost (Koenig).
+ * La columna de lectura es un grid con tres anchos: main, wide y full,
+ * para soportar las tarjetas .kg-width-wide y .kg-width-full.
+ */
+.gh-content {
+  --inset: max(0px, (var(--wide) - var(--measure)) / 2);
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--gutter), 1fr)
+    [wide-start] minmax(0, var(--inset))
+    [main-start] min(var(--measure), 100% - 2 * var(--gutter)) [main-end]
+    minmax(0, var(--inset)) [wide-end]
+    minmax(var(--gutter), 1fr) [full-end];
+}
+
+.gh-content > * { grid-column: main; margin-block: 0; }
+.gh-content > * + * { margin-top: 1.25em; }
+.gh-content > .kg-width-wide { grid-column: wide; }
+.gh-content > .kg-width-full { grid-column: full; }
+
+.gh-content > :is(h2, h3, h4) { margin-top: 2em; }
+.gh-content > :is(h2, h3, h4) + * { margin-top: 0.75em; }
+.gh-content h2 { font-size: var(--step-2); }
+.gh-content h3 { font-size: var(--step-1); }
+.gh-content h4 { font-size: var(--step-0); }
+
+.gh-content :is(ul, ol) { padding-left: 1.4em; }
+.gh-content li + li { margin-top: 0.4em; }
+
+.gh-content hr {
+  border: 0;
+  height: 1px;
+  background: var(--border);
+  margin-block: 2.5em;
+}
+
+.gh-content blockquote {
+  margin-inline: 0;
+  padding-left: 1.2em;
+  border-left: 3px solid var(--accent);
+  font-style: italic;
+}
+.gh-content blockquote.kg-blockquote-alt {
+  border: 0;
+  padding: 0 1.5em;
+  text-align: center;
+  font-size: var(--step-1);
+  color: var(--muted);
+}
+
+/* Código */
+.gh-content :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  padding: 0.1em 0.35em;
+  background: var(--surface);
+  border-radius: 4px;
+}
+.gh-content pre {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  line-height: 1.55;
+  padding: var(--space-s) var(--space-m);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+
+/* Imágenes y figuras */
+.gh-content figure { margin-inline: 0; }
+.gh-content figcaption,
+.kg-card figcaption {
+  margin-top: 0.6em;
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  color: var(--muted);
+  text-align: center;
+}
+.kg-image-card img { margin-inline: auto; border-radius: var(--radius); }
+.kg-image-card.kg-width-full img { border-radius: 0; width: 100%; }
+
+/* Galería: el flex de cada imagen se ajusta a su proporción (ver PostBody.astro) */
+.kg-gallery-container { display: flex; flex-direction: column; gap: 0.5rem; }
+.kg-gallery-row { display: flex; gap: 0.5rem; }
+.kg-gallery-image { flex: 1 1 0; min-width: 0; }
+.kg-gallery-image img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); }
+
+/* Embeds */
+.kg-embed-card { display: flex; flex-direction: column; align-items: center; }
+.kg-embed-card iframe { width: 100%; aspect-ratio: 16 / 9; }
+
+/* Bookmark */
+.kg-bookmark-card a.kg-bookmark-container {
+  display: flex;
+  min-height: 8rem;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-family: var(--font-ui);
+}
+.kg-bookmark-content { flex: 1; padding: var(--space-s); min-width: 0; }
+.kg-bookmark-title { font-weight: 600; }
+.kg-bookmark-description {
+  margin-top: 0.3em;
+  font-size: var(--step--1);
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.kg-bookmark-metadata {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: 0.8em;
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+.kg-bookmark-icon { width: 18px; height: 18px; }
+.kg-bookmark-publisher { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kg-bookmark-thumbnail { flex: 0 0 33%; position: relative; }
+.kg-bookmark-thumbnail img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* Callout */
+.kg-callout-card {
+  display: flex;
+  gap: 0.8em;
+  padding: var(--space-s) var(--space-m);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.kg-callout-card-accent { background: var(--accent); color: #fff; }
+.kg-callout-emoji { font-size: 1.2em; line-height: 1.5; }
+
+/* Toggle (se abre con el script de PostBody.astro) */
+.kg-toggle-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-s) var(--space-m);
+}
+.kg-toggle-heading { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+.kg-toggle-heading-text { font-family: var(--font-ui); font-size: var(--step-0); }
+.kg-toggle-card-icon { background: none; border: 0; color: inherit; width: 1.2em; height: 1.2em; padding: 0; transition: rotate var(--duration) var(--ease); }
+.kg-toggle-card-icon svg { width: 100%; height: 100%; }
+.kg-toggle-card[data-kg-toggle-state='close'] .kg-toggle-content { display: none; }
+.kg-toggle-card[data-kg-toggle-state='open'] .kg-toggle-card-icon { rotate: 180deg; }
+.kg-toggle-content { margin-top: 0.6em; }
+
+/* Botón */
+.kg-button-card { display: flex; }
+.kg-button-card.kg-align-center { justify-content: center; }
+.kg-btn {
+  display: inline-block;
+  padding: 0.6em 1.3em;
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  text-decoration: none;
+}
+.kg-btn-accent { background: var(--accent); color: #fff; }
+.kg-btn-accent:hover { color: #fff; filter: brightness(1.1); }
