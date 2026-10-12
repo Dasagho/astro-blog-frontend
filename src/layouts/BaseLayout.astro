@@ -26,6 +26,12 @@ const accent = settings.accent_color ? `--accent: ${settings.accent_color}` : un
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
     {settings.icon && <link rel="icon" href={settings.icon} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap"
+    />
     <ClientRouter />
   </head>
   <body>

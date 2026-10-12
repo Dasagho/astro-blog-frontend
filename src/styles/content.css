@@ -102,7 +102,7 @@
   font-family: var(--font-ui);
 }
 .kg-bookmark-content { flex: 1; padding: var(--space-s); min-width: 0; }
-.kg-bookmark-title { font-weight: 600; }
+.kg-bookmark-title { font-weight: 500; }
 .kg-bookmark-description {
   margin-top: 0.3em;
   font-size: var(--step--1);
@@ -137,7 +137,7 @@
   border-radius: var(--radius);
   background: var(--surface);
 }
-.kg-callout-card-accent { background: var(--accent); color: #fff; }
+.kg-callout-card-accent { background: var(--accent); color: var(--on-accent); }
 .kg-callout-emoji { font-size: 1.2em; line-height: 1.5; }
 
 /* Toggle (se abre con el script de PostBody.astro) */
@@ -162,8 +162,8 @@
   padding: 0.6em 1.3em;
   border-radius: var(--radius);
   font-family: var(--font-ui);
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
 }
-.kg-btn-accent { background: var(--accent); color: #fff; }
-.kg-btn-accent:hover { color: #fff; filter: brightness(1.1); }
+.kg-btn-accent { background: var(--accent); color: var(--on-accent); }
+.kg-btn-accent:hover { color: var(--on-accent); filter: brightness(1.1); }
