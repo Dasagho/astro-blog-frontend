@@ -2,9 +2,9 @@
 :root {
   color-scheme: light dark;
 
-  --font-body: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, Georgia, serif;
-  --font-ui: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-  --font-mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Menlo, Consolas, monospace;
+  --font-body: Newsreader, Charter, Georgia, serif;
+  --font-ui: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
 
   --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
   --step-0: clamp(1.05rem, 1rem + 0.25vw, 1.2rem);
@@ -23,12 +23,14 @@
   --gutter: clamp(1rem, 4vw, 2rem);
   --radius: 6px;
 
-  --bg: #fbfaf7;
-  --surface: #f1efe9;
-  --text: #1d1c1a;
-  --muted: #6b6862;
-  --border: #e2dfd6;
-  --accent: #b5502b;   /* sobrescrito por el accent color de Ghost si existe */
+  --bg: #f1eee6;
+  --surface: #e5e0d2;
+  --text: #23211a;
+  --muted: #5a5342;
+  --border: #c5bba3;
+  --accent: #265462;   /* sobrescrito por el accent color de Ghost si existe */
+
+  --on-accent: #f6f4ee;
 
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --duration: 280ms;
@@ -36,10 +38,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #151514;
-    --surface: #1f1f1d;
-    --text: #e9e6df;
-    --muted: #9b978e;
-    --border: #2f2e2b;
+    --bg: #181e24;
+    --surface: #252d38;
+    --text: #ebe9e1;
+    --muted: #adb5bd;
+    --border: #404d5e;
+    --accent: #91c4d1;
+    --on-accent: #0f1a1e;
   }
 }
