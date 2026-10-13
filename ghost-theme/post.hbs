@@ -4,6 +4,7 @@
     <header class="container post-header">
         <h1 style="view-transition-name: title-{{slug}}">{{title}}</h1>
         {{> "post-meta"}}
+        {{#if authors}}<p class="byline">Por {{authors}}</p>{{/if}}
     </header>
 
     {{#if feature_image}}
@@ -16,6 +17,25 @@
     <div class="post-body">
         {{content}}
     </div>
+
+    <aside class="container more" aria-label="Sigue leyendo">
+        {{#if primary_tag}}
+        {{#get "posts" filter="tags:[{{primary_tag.slug}}]+id:-{{id}}" limit="3"}}
+        {{#if posts}}
+        <h2>Más sobre <a href="{{../primary_tag.url}}">{{../primary_tag.name}}</a></h2>
+        <ul role="list">
+            {{#foreach posts}}
+            <li><a href="{{url}}">{{title}}</a> <time datetime="{{date published_at format="YYYY-MM-DD"}}">{{date published_at format="D MMM YYYY"}}</time></li>
+            {{/foreach}}
+        </ul>
+        {{/if}}
+        {{/get}}
+        {{/if}}
+        <div class="adjacent">
+            {{#prev_post}}<a href="{{url}}">← {{title}}</a>{{/prev_post}}
+            {{#next_post}}<a class="next" href="{{url}}">{{title}} →</a>{{/next_post}}
+        </div>
+    </aside>
 
     <nav class="container back">
         <a href="{{@site.url}}">← Todos los posts</a>

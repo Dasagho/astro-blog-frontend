@@ -1,0 +1,16 @@
+{{!< default}}
+{{#post}}
+<header class="container intro">
+    <h1>{{title}}</h1>
+</header>
+{{#if content}}<div class="post-body">{{content}}</div>{{/if}}
+<div class="container">
+    {{#get "tags" limit="100" include="count.posts"}}
+    <ul class="index-list" role="list">
+        {{#foreach tags}}
+        <li><a href="{{url}}">{{name}}</a> <span class="count">{{count.posts}}</span></li>
+        {{/foreach}}
+    </ul>
+    {{/get}}
+</div>
+{{/post}}
