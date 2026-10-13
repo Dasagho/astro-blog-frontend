@@ -1,12 +1,12 @@
 {
   "name": "dsaleh-blog",
-  "description": "Tema propio para blog.dsaleh.xyz: réplica del frontend Astro (sobrio, legible, modo oscuro, view transitions).",
+  "description": "Tema propio para blog.dsaleh.xyz",
   "version": "1.0.0",
   "license": "MIT",
   "keywords": ["ghost-theme"],
   "author": {
-    "name": "dsaleh",
-    "email": "you@example.com"
+    "name": "David Saleh",
+    "email": "damirsa2001@gmail.com"
   },
   "engines": {
     "ghost": ">=5.0.0"
