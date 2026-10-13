@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="{{@site.locale}}"{{#if @site.accent_color}} style="--accent: {{@site.accent_color}}"{{/if}}>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap">
+
+    {{!-- ghost_head inyecta también el CSS de las tarjetas del editor; el CSS del tema va después para poder sobrescribirlo --}}
+    {{ghost_head}}
+    <link rel="stylesheet" href="{{asset "css/screen.css"}}">
+</head>
+<body class="{{body_class}}">
+
+<header class="site-header">
+    <div class="container inner">
+        <a class="brand" href="{{@site.url}}">
+            {{#if @site.logo}}<img src="{{@site.logo}}" alt="{{@site.title}}">{{else}}{{@site.title}}{{/if}}
+        </a>
+        {{#if navigation}}
+        <nav aria-label="Principal">
+            <ul role="list">
+                {{#foreach navigation}}
+                <li><a href="{{url absolute="true"}}"{{#if current}} aria-current="page"{{/if}}>{{label}}</a></li>
+                {{/foreach}}
+            </ul>
+        </nav>
+        {{/if}}
+    </div>
+</header>
+
+<main>
+    {{{body}}}
+</main>
+
+<footer class="site-footer">
+    <div class="container inner">
+        <span>© {{date format="YYYY"}} {{@site.title}}</span>
+        <nav aria-label="Secundaria">
+            <ul role="list">
+                {{#foreach secondary_navigation}}
+                <li><a href="{{url absolute="true"}}">{{label}}</a></li>
+                {{/foreach}}
+                <li><a href="{{@site.url}}/rss/">RSS</a></li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+{{ghost_foot}}
+</body>
+</html>

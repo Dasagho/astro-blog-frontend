@@ -1,0 +1,21 @@
+{
+  "name": "dsaleh-blog",
+  "description": "Tema propio para blog.dsaleh.xyz: réplica del frontend Astro (sobrio, legible, modo oscuro, view transitions).",
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": ["ghost-theme"],
+  "author": {
+    "name": "dsaleh",
+    "email": "you@example.com"
+  },
+  "engines": {
+    "ghost": ">=5.0.0"
+  },
+  "config": {
+    "posts_per_page": 24,
+    "image_sizes": {
+      "m": { "width": 720 },
+      "l": { "width": 1200 }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<article class="card">
+    {{#if feature_image}}
+    <a class="image" href="{{url}}" tabindex="-1" aria-hidden="true">
+        <img src="{{img_url feature_image size="m"}}" alt="" loading="lazy" decoding="async" style="view-transition-name: post-image-{{slug}}">
+    </a>
+    {{/if}}
+    <h2 class="title"><a href="{{url}}" style="view-transition-name: title-{{slug}}">{{title}}</a></h2>
+    {{> "post-meta"}}
+    {{#if excerpt}}<p class="excerpt">{{excerpt words="60"}}</p>{{/if}}
+</article>

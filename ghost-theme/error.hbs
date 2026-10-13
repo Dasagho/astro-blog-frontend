@@ -1,0 +1,6 @@
+{{!< default}}
+<div class="container">
+    <h1>{{statusCode}}</h1>
+    <p>{{#match statusCode "404"}}Esta página no existe.{{else}}{{message}}{{/match}}</p>
+    <p><a href="{{@site.url}}">← Volver al inicio</a></p>
+</div>
