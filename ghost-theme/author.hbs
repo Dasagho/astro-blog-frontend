@@ -5,6 +5,11 @@
         {{#if profile_image}}<img class="avatar" src="{{img_url profile_image size="m"}}" alt="">{{/if}}
         <h1>{{name}}</h1>
         {{#if bio}}<p>{{bio}}</p>{{/if}}
+        <p class="meta">
+            {{#if website}}<a href="{{website}}" rel="me noopener">Web</a>{{/if}}
+            {{#if twitter}}<a href="{{social_url type="twitter"}}" rel="me noopener">X</a>{{/if}}
+            {{#if facebook}}<a href="{{social_url type="facebook"}}" rel="me noopener">Facebook</a>{{/if}}
+        </p>
         {{/author}}
     </header>
 

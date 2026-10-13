@@ -22,3 +22,9 @@ Antes de activarlo, edita `author.email` en `package.json`.
 - Settings → General → Publication language: `es` (fechas en español y `<html lang>`).
 - Navegación: Settings → Navigation (menú principal y secundario). Colores: el color de acento sale de Design & branding.
 - Si cambias algo del tema, vuelve a subir el zip con el mismo nombre de tema: lo sustituye.
+
+## Páginas con plantilla propia
+
+`custom-etiquetas.hbs` (índice de etiquetas) y `custom-archivo.hbs` (todos los posts por fecha):
+crea una página en Ghost (Pages → New page), en su ajuste "Template" elige "Etiquetas" o "Archivo"
+y añade su enlace en Settings → Navigation.

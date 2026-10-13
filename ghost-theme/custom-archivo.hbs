@@ -1,0 +1,19 @@
+{{!< default}}
+{{#post}}
+<header class="container intro">
+    <h1>{{title}}</h1>
+</header>
+{{#if content}}<div class="post-body">{{content}}</div>{{/if}}
+<div class="container">
+    {{#get "posts" limit="100"}}
+    <ol class="index-list" role="list">
+        {{#foreach posts}}
+        <li>
+            <time datetime="{{date published_at format="YYYY-MM-DD"}}">{{date published_at format="D MMM YYYY"}}</time>
+            <a href="{{url}}">{{title}}</a>
+        </li>
+        {{/foreach}}
+    </ol>
+    {{/get}}
+</div>
+{{/post}}

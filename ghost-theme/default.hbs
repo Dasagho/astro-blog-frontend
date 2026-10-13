@@ -28,6 +28,7 @@
             </ul>
         </nav>
         {{/if}}
+        <a class="rss" href="{{@site.url}}/rss/">RSS</a>
     </div>
 </header>
 
@@ -43,6 +44,8 @@
                 {{#foreach secondary_navigation}}
                 <li><a href="{{url absolute="true"}}">{{label}}</a></li>
                 {{/foreach}}
+                {{#if @site.twitter}}<li><a href="{{social_url @site type="twitter"}}" rel="me noopener">X</a></li>{{/if}}
+                {{#if @site.facebook}}<li><a href="{{social_url @site type="facebook"}}" rel="me noopener">Facebook</a></li>{{/if}}
                 <li><a href="{{@site.url}}/rss/">RSS</a></li>
             </ul>
         </nav>
