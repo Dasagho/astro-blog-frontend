@@ -3,7 +3,7 @@
  * La columna de lectura es un grid con tres anchos: main, wide y full,
  * para soportar las tarjetas .kg-width-wide y .kg-width-full.
  */
-.gh-content {
+.post-body {
   --inset: max(0px, (var(--wide) - var(--measure)) / 2);
   display: grid;
   grid-template-columns:
@@ -14,34 +14,34 @@
     minmax(var(--gutter), 1fr) [full-end];
 }
 
-.gh-content > * { grid-column: main; margin-block: 0; }
-.gh-content > * + * { margin-top: 1.25em; }
-.gh-content > .kg-width-wide { grid-column: wide; }
-.gh-content > .kg-width-full { grid-column: full; }
+.post-body > * { grid-column: main; margin-block: 0; }
+.post-body > * + * { margin-top: 1.25em; }
+.post-body > .kg-width-wide { grid-column: wide; }
+.post-body > .kg-width-full { grid-column: full; }
 
-.gh-content > :is(h2, h3, h4) { margin-top: 2em; }
-.gh-content > :is(h2, h3, h4) + * { margin-top: 0.75em; }
-.gh-content h2 { font-size: var(--step-2); }
-.gh-content h3 { font-size: var(--step-1); }
-.gh-content h4 { font-size: var(--step-0); }
+.post-body > :is(h2, h3, h4) { margin-top: 2em; }
+.post-body > :is(h2, h3, h4) + * { margin-top: 0.75em; }
+.post-body h2 { font-size: var(--step-2); }
+.post-body h3 { font-size: var(--step-1); }
+.post-body h4 { font-size: var(--step-0); }
 
-.gh-content :is(ul, ol) { padding-left: 1.4em; }
-.gh-content li + li { margin-top: 0.4em; }
+.post-body :is(ul, ol) { padding-left: 1.4em; }
+.post-body li + li { margin-top: 0.4em; }
 
-.gh-content hr {
+.post-body hr {
   border: 0;
   height: 1px;
   background: var(--border);
   margin-block: 2.5em;
 }
 
-.gh-content blockquote {
+.post-body blockquote {
   margin-inline: 0;
   padding-left: 1.2em;
   border-left: 3px solid var(--accent);
   font-style: italic;
 }
-.gh-content blockquote.kg-blockquote-alt {
+.post-body blockquote.kg-blockquote-alt {
   border: 0;
   padding: 0 1.5em;
   text-align: center;
@@ -50,14 +50,14 @@
 }
 
 /* Código */
-.gh-content :not(pre) > code {
+.post-body :not(pre) > code {
   font-family: var(--font-mono);
   font-size: 0.88em;
   padding: 0.1em 0.35em;
   background: var(--surface);
   border-radius: 4px;
 }
-.gh-content pre {
+.post-body pre {
   font-family: var(--font-mono);
   font-size: var(--step--1);
   line-height: 1.55;
@@ -69,8 +69,8 @@
 }
 
 /* Imágenes y figuras */
-.gh-content figure { margin-inline: 0; }
-.gh-content figcaption,
+.post-body figure { margin-inline: 0; }
+.post-body figcaption,
 .kg-card figcaption {
   margin-top: 0.6em;
   font-family: var(--font-ui);
@@ -245,8 +245,8 @@
 
 /* Tarjetas de HTML/Markdown y bloques sin estilo propio */
 .kg-html-card, .kg-markdown-card { overflow-x: auto; }
-.gh-content table { width: 100%; border-collapse: collapse; font-size: var(--step--1); }
-.gh-content :is(th, td) { padding: 0.5em 0.75em; border-bottom: 1px solid var(--border); text-align: left; }
+.post-body table { width: 100%; border-collapse: collapse; font-size: var(--step--1); }
+.post-body :is(th, td) { padding: 0.5em 0.75em; border-bottom: 1px solid var(--border); text-align: left; }
 
 /* Tarjetas que necesitan membresía/JS de Ghost: no aplican en un sitio estático */
 .kg-signup-card, .kg-cta-card, .kg-donation-card { display: none; }

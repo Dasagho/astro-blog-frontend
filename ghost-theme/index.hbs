@@ -1,0 +1,18 @@
+{{!< default}}
+<div class="container">
+    <header class="intro">
+        <h1>{{@site.title}}</h1>
+        {{#if @site.description}}<p>{{@site.description}}</p>{{/if}}
+    </header>
+
+    {{#if posts}}
+    <ol class="posts" role="list">
+        {{#foreach posts}}
+        <li>{{> "post-card"}}</li>
+        {{/foreach}}
+    </ol>
+    {{> "pager"}}
+    {{else}}
+    <p class="empty">Todavía no hay posts publicados.</p>
+    {{/if}}
+</div>

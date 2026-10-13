@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PostCard from '../../components/PostCard.astro';
 import { getAuthors, getPosts, type Author, type Post } from '../../lib/ghost';
 
@@ -20,7 +20,7 @@ interface Props {
 const { author, posts } = Astro.props;
 ---
 
-<BaseLayout title={author.name} description={author.bio ?? undefined}>
+<Layout title={author.name} description={author.bio ?? undefined}>
   <div class="container">
     <header class="intro">
       {author.profile_image && <img class="avatar" src={author.profile_image} alt="" />}
@@ -35,7 +35,7 @@ const { author, posts } = Astro.props;
       </ol>
     )}
   </div>
-</BaseLayout>
+</Layout>
 
 <style>
   .intro { margin-bottom: var(--space-xl); }

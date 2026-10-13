@@ -1,0 +1,11 @@
+{{#if pagination.next}}
+<nav class="pager" aria-label="Paginación">
+    {{#if pagination.prev}}<a href="{{page_url pagination.prev}}">← Más recientes</a>{{else}}<span></span>{{/if}}
+    <a href="{{page_url pagination.next}}">Más antiguos →</a>
+</nav>
+{{else}}{{#if pagination.prev}}
+<nav class="pager" aria-label="Paginación">
+    <a href="{{page_url pagination.prev}}">← Más recientes</a>
+    <span></span>
+</nav>
+{{/if}}{{/if}}

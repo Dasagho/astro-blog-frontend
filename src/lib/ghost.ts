@@ -69,7 +69,12 @@ async function request<T>(path: string, params: Record<string, string> = {}): Pr
   const url = new URL(`/ghost/api/content/${path}/`, GHOST_URL);
   url.search = new URLSearchParams({ key: GHOST_CONTENT_API_KEY, ...params }).toString();
 
-  const res = await fetch(url, { headers: { 'Accept-Version': 'v6.0' } });
+  let res: Response;
+  try {
+    res = await fetch(url, { headers: { 'Accept-Version': 'v6.0' } });
+  } catch (err) {
+    throw new Error(`No se pudo conectar con Ghost (${GHOST_URL}) en /${path}/: ${(err as Error).message}`);
+  }
   if (!res.ok) {
     const body = await res.text();
     throw new Error(`Ghost ${res.status} en /${path}/: ${body.slice(0, 300)}`);

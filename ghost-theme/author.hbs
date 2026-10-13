@@ -1,0 +1,21 @@
+{{!< default}}
+<div class="container">
+    <header class="intro">
+        {{#author}}
+        {{#if profile_image}}<img class="avatar" src="{{img_url profile_image size="m"}}" alt="">{{/if}}
+        <h1>{{name}}</h1>
+        {{#if bio}}<p>{{bio}}</p>{{/if}}
+        {{/author}}
+    </header>
+
+    {{#if posts}}
+    <ol class="posts" role="list">
+        {{#foreach posts}}
+        <li>{{> "post-card"}}</li>
+        {{/foreach}}
+    </ol>
+    {{> "pager"}}
+    {{else}}
+    <p class="empty">Todavía no hay posts de este autor.</p>
+    {{/if}}
+</div>
